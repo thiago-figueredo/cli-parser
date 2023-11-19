@@ -18,8 +18,7 @@ Arg* arg_new(char* short_name, char* long_name, char* description,  void* value,
   *arg = (Arg) {
     .required = required,
     .value = value,
-    .kind = kind,
-    .next = NULL
+    .kind = kind
   };
 
   arg->short_name = malloc((strlen(short_name) + 1) * sizeof(char)),
@@ -67,7 +66,7 @@ Arg* arg_int(char* short_name, char* long_name, char* description, int value) {
 }
 
 Arg* arg_int_required(char* short_name, char* long_name, char* description) {
-  return arg_new(short_name, long_name, description, NULL, ARG_INT, false);
+  return arg_new(short_name, long_name, description, NULL, ARG_INT, true);
 }
 
 Arg* arg_bool(char* short_name, char* long_name, char* description, bool value) {
@@ -79,7 +78,7 @@ Arg* arg_bool(char* short_name, char* long_name, char* description, bool value) 
 }
 
 Arg* arg_bool_required(char* short_name, char* long_name, char* description) {
-  return arg_new(short_name, long_name, description, NULL, ARG_BOOL, false);
+  return arg_new(short_name, long_name, description, NULL, ARG_BOOL, true);
 }
 
 void arg_print_value(Arg* arg) {
@@ -93,22 +92,15 @@ void arg_print_value(Arg* arg) {
     printf("%s", *(bool*)(arg->value) ? "true" : "false");
   } else {
     fprintf(stderr, "ERROR: Unknown arg kind");
+    arg_free(arg);
     exit(EXIT_FAILURE);
   }
 }
 
-void free_arg(Arg* arg) {
-  Arg* current = arg;
-  Arg* temp = NULL;
-
-  while (current) {
-    temp = current;
-    current = current->next;
-
-    free((void*)temp->value);
-    free(temp->short_name);
-    free(temp->long_name);
-    free(temp->description);
-    free(temp);
-  }
+void arg_free(Arg* arg) {
+  free((void*)arg->value);
+  free(arg->short_name);
+  free(arg->long_name);
+  free(arg->description);
+  free(arg);
 }

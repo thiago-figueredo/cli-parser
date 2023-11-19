@@ -28,7 +28,6 @@ typedef struct Arg {
   char* description;
   bool required;
   ArgKind kind;
-  struct Arg* next;
 } Arg;
 
 Arg* arg_empty();
@@ -38,7 +37,7 @@ Arg* arg_int(char* short_name, char* long_name, char* description, int value);
 Arg* arg_int_required(char* short_name, char* long_name, char* description);
 Arg* arg_bool(char* short_name, char* long_name, char* description, bool value);
 Arg* arg_bool_required(char* short_name, char* long_name, char* description);
-void free_arg(Arg* arg);
+void arg_free(Arg* arg);
 void arg_print_value(Arg* arg);
 
 #endif
