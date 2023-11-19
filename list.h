@@ -16,7 +16,6 @@ typedef struct ListNode {
 typedef struct  {
   ListNode* head;
   ListNode* tail;
-  size_t count;
   ListKind kind;
 } List;
 

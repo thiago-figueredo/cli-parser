@@ -72,22 +72,6 @@ Arg* list_find_arg(List *list, ListNode* node) {
 
 Entry* list_find_entry(List *list, ListNode* node) {
   assert(false && "TODO: implement list_find_entry");
-
-  // Entry* temp_entry = list->head->data;
-  // Entry* entry = node->data;
-
-  // while (temp_entry) {
-  //   if (temp_entry-> == entry->short_name) {
-  //     return temp_entry;
-  //   }
-
-  //   if (temp_entry->long_name && strcmp(temp_entry->long_name, entry->long_name) == 0) {
-  //     return temp_entry;
-  //   }
-
-  //   temp_entry = temp_entry->next;
-  // }
-
   return NULL;
 }
 
