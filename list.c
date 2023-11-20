@@ -14,7 +14,6 @@ List* list_new(ListKind kind) {
     .head = NULL,
     .tail = NULL,
     .kind = kind,
-    .count = 0
   };
 
   return list;
